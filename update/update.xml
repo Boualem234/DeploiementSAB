@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <version>1.0.1</version>
+  <url>https://raw.githubusercontent.com/Boualem234/DeploiementSAB/main/update/MonAppInstaller.exe</url>
+  <mandatory>false</mandatory>
+  <changelog>https://raw.githubusercontent.com/Boualem234/DeploiementSAB/main/update/changelog.txt</changelog>
+</item>
