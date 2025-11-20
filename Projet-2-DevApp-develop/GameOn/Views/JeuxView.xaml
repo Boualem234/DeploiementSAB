@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="GameOn.Views.JeuxView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameOn.Views"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewmodel="clr-namespace:GameOn.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodel:JeuxVM}"
+             d:DesignHeight="450" d:DesignWidth="800"
+                          HorizontalAlignment="Stretch" 
+             VerticalAlignment="Stretch">
+
+    <Grid Background="{DynamicResource MaterialDesignPaper}" >
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="20">
+
+            <ItemsControl ItemsSource="{Binding Jeux}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card Width="280" Margin="12" Padding="16" 
+                                             Background="{DynamicResource MaterialDesignCardBackground}">
+                            <StackPanel>
+                                <!-- Nom du jeu -->
+                                <TextBlock Text="{Binding Nom}" 
+                                           FontSize="20" 
+                                           FontWeight="Bold" 
+                                           TextWrapping="Wrap" 
+                                           Margin="0,0,0,16"
+                                           Foreground="{DynamicResource MaterialDesignBody}"/>
+
+                                <!-- Infos: Joueurs et Durée -->
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                    <materialDesign:PackIcon Kind="AccountMultiple" 
+                                                             Width="18" 
+                                                             Height="18" 
+                                                             VerticalAlignment="Center" 
+                                                             Margin="0,0,8,0"
+                                                             Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                                    <TextBlock Text="{Binding NbJoueurs, StringFormat='Joueurs : {0}'}" 
+                                               FontSize="14" 
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                                    <materialDesign:PackIcon Kind="ClockOutline" 
+                                                             Width="18" 
+                                                             Height="18" 
+                                                             VerticalAlignment="Center" 
+                                                             Margin="0,0,8,0"
+                                                             Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                                    <TextBlock Text="{Binding Duree, StringFormat='Durée : {0} heures'}" 
+                                               FontSize="14" 
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <!-- Bouton Jouer -->
+                                <Button Content="Jouer" 
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        HorizontalAlignment="Stretch"
+                                        Click="Button_Jouer"
+                                        Command="{Binding DataContext.PlayGameCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}"/>
+                            </StackPanel>
+
+                        </materialDesign:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
+
+        </ScrollViewer>
+
+    </Grid>
+
+</UserControl>

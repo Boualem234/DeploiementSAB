@@ -1,0 +1,236 @@
+﻿<UserControl x:Class="GameOn.Views.AdminEmployeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameOn.Views"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewmodel="clr-namespace:GameOn.ViewModels"
+             xmlns:converters="clr-namespace:GameOn.Views.Converters"
+             d:DataContext="{d:DesignInstance Type=viewmodel:AdminEmployeVM}"
+             d:DesignHeight="450" MinHeight="450" d:DesignWidth="1100" MinWidth="1100" Background="White">
+
+    <UserControl.Resources>
+        <converters:BoolOuiNonConverter x:Key="BoolOuiNonConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.8*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Zone tableau de données -->
+        <!-- Tableau des employés -->
+        <ListView SelectedItem="{Binding EmployeSelectionne}"
+                    ItemsSource="{Binding Employes}"
+                  SelectionMode="Single">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                             Header="ID">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Id}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn
+                             Header="Nom">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Nom}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn
+                             Header="Prénom">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Prenom }"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn
+                             Header="Département">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Departement.Nom }"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn
+                             Header="Peut jouer">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding PeutJouer, Converter={StaticResource BoolOuiNonConverter}}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Zone formulaire -->
+        <Border Grid.Column="1"
+                BorderThickness="5"
+                CornerRadius="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Padding="50, 20">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="DarkBlue" Offset="0" />
+                    <GradientStop Color="LightBlue" Offset="1" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <materialDesign:Card Height="370" Background="White" >
+                <StackPanel Width="280" Orientation="Vertical" HorizontalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="1.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Titre -->
+                        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="0,0,0,10" Text="Ajouter/Modifier un employé" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                        <!-- Labels -->
+                        <Label Grid.Column="0" Grid.Row="1" Margin="0,5,0,5" Content="Nom:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <Label Grid.Column="0" Grid.Row="2" Margin="0,5,0,5" Content="Prénom:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <Label Grid.Column="0" Grid.Row="3" Margin="0,5,0,5" Content="Courriel:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <Label Grid.Column="0" Grid.Row="4" Margin="0,5,0,5" Content="Département:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <Label Grid.Column="0" Grid.Row="5" Margin="0,5,0,5" Content="Peut jouer:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+                        <!-- Nom -->
+                        <TextBox 
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        x:Name="NomTextBox"
+                        Margin="0,5,0,5"
+                        Text="{Binding Nom}"
+                        materialDesign:HintAssist.Hint="Nom"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        </TextBox>
+
+                        <!-- Prénom -->
+                        <TextBox 
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        x:Name="PrenomTextBox"
+                        Margin="0,5,0,5"
+                        Text="{Binding Prenom}"
+                        materialDesign:HintAssist.Hint="Prénom"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        </TextBox>
+
+                        <!-- Courriel -->
+                        <TextBox 
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        x:Name="CourrielTextBox"
+                        Margin="0,5,0,5"
+                        Text="{Binding Courriel}"
+                        materialDesign:HintAssist.Hint="Courriel"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        </TextBox>
+
+                        <!-- Département -->
+                        <ComboBox
+                        Grid.Column="1"
+                        Grid.Row="4"
+                        x:Name="DepartementComboBox"
+                        Margin="0,5,0,5"
+                        materialDesign:HintAssist.Hint="Departement"
+                        SelectedItem="{Binding Departement}"
+                        ItemsSource="{Binding Departements}"
+                        DisplayMemberPath="Nom">
+                        </ComboBox>
+
+                        <!-- Jeux accessibles -->
+                        <CheckBox
+                        Grid.Column="1"
+                        Grid.Row="5"
+                        x:Name="AccessibleCheckBox"
+                        Margin="0,5,0,5"
+                        Style="{StaticResource MaterialDesignCheckBox}"
+                        IsChecked="{Binding PeutJouer}">
+                        </CheckBox>
+
+                        <!-- Erreur -->
+                        <TextBlock
+                           Grid.Row="6"
+                           Grid.ColumnSpan="2"
+                           Text="{Binding Erreur}"
+                           Foreground="Red"
+                           FontSize="12"
+                           Margin="0,0,0,10"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap" />
+
+                        <!-- Boutons -->
+                        <Grid Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Bouton Ajouter -->
+                            <Button 
+                                Grid.Column="0"
+                                x:Name="AjouterButton"
+                                Margin="0,5,5,5"
+                                Content="Ajouter"
+                                Command="{Binding AjouerEmployeCommand}"
+                                Height="40"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                materialDesign:ButtonAssist.CornerRadius="20"
+                                Foreground="White"
+                                >
+                            </Button>
+
+                            <!-- Bouton Modifier -->
+                            <Button 
+                                Grid.Column="1"
+                                x:Name="ModifierButton"
+                                Margin="5,5,0,5"
+                                Content="Modifier"
+                                Command="{Binding ModifierEmployeCommand}"
+                                Height="40"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                materialDesign:ButtonAssist.CornerRadius="20"
+                                Foreground="White">
+                            </Button>
+                        </Grid>
+                        <!-- Bouton Supprimer -->
+                        <Button 
+                                Grid.Column="0"
+                                Grid.Row="8"
+                                Grid.ColumnSpan="2"
+                                x:Name="SupprimerButton"
+                                Margin="0,5,0,5"
+                                Content="Supprimer"
+                                Command="{Binding SupprimerEmployeCommand}"
+                                Height="40"
+                                materialDesign:ButtonAssist.CornerRadius="20"
+                                BorderThickness="0"
+                                Foreground="White"
+                                Background="DarkRed">
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </materialDesign:Card>
+        </Border>
+    </Grid>
+</UserControl>
