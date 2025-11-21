@@ -1,0 +1,1 @@
+Vous pourrez retrouver le progiciel d’installation produit à la tâche 3 de l’étape 3 ainsi que ses fichier de configuration (.iss, .xml ou autres) dans le dossier update.
